@@ -85,32 +85,32 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ImageVie
             public boolean onLongClick(View view) {
                 if (comment.getPublisher().equals(firebaseUser.getUid())) {
 
-                        AlertDialog alertDialog = new AlertDialog.Builder(mContext).create();
-                        alertDialog.setTitle("Do you want to delete?");
-                        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "No",
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        dialog.dismiss();
-                                    }
-                                });
-                        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Yes",
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        FirebaseDatabase.getInstance().getReference("Comments")
-                                                .child(postid).child(comment.getCommentid())
-                                                .removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
-                                            @Override
-                                            public void onComplete(@NonNull Task<Void> task) {
-                                                if (task.isSuccessful()){
-                                                    Toast.makeText(mContext, "Deleted!", Toast.LENGTH_SHORT).show();
-                                                }
+                    AlertDialog alertDialog = new AlertDialog.Builder(mContext).create();
+                    alertDialog.setTitle("Do you want to delete?");
+                    alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "No",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            });
+                    alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Yes",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    FirebaseDatabase.getInstance().getReference("Comments")
+                                            .child(postid).child(comment.getCommentid())
+                                            .removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if (task.isSuccessful()){
+                                                Toast.makeText(mContext, "Deleted!", Toast.LENGTH_SHORT).show();
                                             }
-                                        });
-                                        dialog.dismiss();
-                                    }
-                                });
-                        alertDialog.show();
-                    }
+                                        }
+                                    });
+                                    dialog.dismiss();
+                                }
+                            });
+                    alertDialog.show();
+                }
                 return true;
             }
         });

@@ -83,7 +83,7 @@ public class SearchFragment extends Fragment {
                 userList.clear();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()){
                     User user = snapshot.getValue(User.class);
-                        userList.add(user);
+                    userList.add(user);
                 }
 
                 userAdapter.notifyDataSetChanged();
